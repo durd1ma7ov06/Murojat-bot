@@ -63,7 +63,7 @@ def make_router(config: Config, db: Database):
     @router.message(CommandStart())
     async def start(message: Message, state: FSMContext):
         await state.clear()
-        await message.answer(f"{config.title}\n\nTalaba murojaatini zamdekanga yuborish va javob olish uchun bot.\n"
+        await message.answer(f"{config.title}\n\nTalaba murojaatini dekanga yuborish va javob olish uchun bot.\n"
                              "Ism va guruh talabaning o'zi tomonidan kiritiladi.\nBoshlash uchun menyudan tanlang.", reply_markup=menu(admin(message.from_user.id)))
 
     @router.message(Command("cancel"))
@@ -80,7 +80,7 @@ def make_router(config: Config, db: Database):
     async def help_message(message: Message, state: FSMContext):
         await state.clear()
         await message.answer("📝 Murojaat yuborish — ism, guruh, mavzu va murojaat matnini kiriting.\n"
-                             "📂 Murojaatlarim — holat va zamdekan javoblarini ko'ring.\n"
+                             "📂 Murojaatlarim — holat va dekan javoblarini ko'ring.\n"
                              "👤 Profil — ism va guruhni yangilang.\n"
                              "/cancel — joriy amalni bekor qilish.\n/id — Telegram ID.\n\n"
                              "Murojaat va profil ma'lumotlaringiz bot bazasida saqlanadi va adminlarga ko'rinadi. "
@@ -95,7 +95,7 @@ def make_router(config: Config, db: Database):
     async def ask_category(message, state):
         await state.update_data(anonymous=False)
         await state.set_state(Form.category)
-        await message.answer("Murojaat mavzusini tanlang. Ism va guruh zamdekanga ko'rinadi.\n"
+        await message.answer("Murojaat mavzusini tanlang. Ism va guruh dekanga ko'rinadi.\n"
                              "Ismni yashirish uchun avval “Anonim yuborish”ni bosing.", reply_markup=buttons(
             [[(category, f"cat:{i}")] for i, category in enumerate(CATEGORIES)] + [[('Anonim yuborish', 'anonymous')]]))
 
@@ -103,7 +103,7 @@ def make_router(config: Config, db: Database):
     async def anonymous_mode(callback: CallbackQuery, state: FSMContext):
         await state.update_data(anonymous=True)
         await callback.answer("Anonim rejim yoqildi")
-        await callback.message.answer("Bot zamdekanga ism va guruhni ko'rsatmaydi. "
+        await callback.message.answer("Bot dekanga ism va guruhni ko'rsatmaydi. "
                                       "Texnik bazada akkaunt bilan bog'lanish saqlanadi; bu to'liq anonimlik emas. "
                                       "Murojaat matnida shaxsingizni oshkor qiladigan ma'lumot yozmang.\n"
                                       "Endi yuqoridan mavzuni tanlang.")
@@ -184,7 +184,7 @@ def make_router(config: Config, db: Database):
         await state.set_state(Form.confirm)
         data = await state.get_data()
         mode = "Anonim" if data.get('anonymous') else "Ism bilan"
-        await message.answer(f"Mavzu: {data['category']}\nYuborish: {mode}\n\n{value}\n\nZamdekanga yuborilsinmi?",
+        await message.answer(f"Mavzu: {data['category']}\nYuborish: {mode}\n\n{value}\n\nDekanga yuborilsinmi?",
                              reply_markup=buttons([[('✅ Yuborish', 'submit'), ('Bekor qilish', 'discard')]]))
 
     @router.callback_query(F.data == 'discard')
@@ -246,7 +246,7 @@ def make_router(config: Config, db: Database):
                               [(label, f'status:{value}:{key}') for key, label in STATUSES.items() if key != ticket['status']]])
         await callback.message.answer(render_ticket(ticket), reply_markup=markup)
         for reply in await db.replies(ticket['id']):
-            await callback.message.answer(f"Zamdekan javobi · {reply['created_at']} UTC\n\n{reply['body']}")
+            await callback.message.answer(f"Dekan javobi · {reply['created_at']} UTC\n\n{reply['body']}")
 
     @router.callback_query(F.data.startswith('status:'))
     async def change_status(callback: CallbackQuery):
@@ -290,7 +290,7 @@ def make_router(config: Config, db: Database):
         ticket = await db.ticket(data['ticket_id'])
         await db.add_reply(ticket['id'], message.from_user.id, value)
         await state.clear()
-        delivered = await notify(message.bot, ticket['user_id'], f"Murojaat #{ticket['id']} uchun zamdekan javobi:\n\n{value}")
+        delivered = await notify(message.bot, ticket['user_id'], f"Murojaat #{ticket['id']} uchun dekan javobi:\n\n{value}")
         await message.answer("Javob saqlandi va talabaga yuborildi." if delivered else
                              "Javob saqlandi. Telegram xabari yetkazilmadi; talaba uni “Murojaatlarim” bo'limida ko'radi.")
 

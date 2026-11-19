@@ -1,13 +1,13 @@
-# Zamdekan Telegram boti
+# Tarix va huquq dekani murojaat bot
 
-Talabalar murojaatini qabul qilish va zamdekan javoblarini yuborish uchun o'zbekcha bot.
+Talabalar murojaatini qabul qilish va dekan javoblarini yuborish uchun o'zbekcha bot.
 
 ## Imkoniyatlar
 
 - Profil: ism, familiya va guruh; ma'lumotlarni yangilash.
 - Murojaat mavzusini tanlash, matn kiritish va yuborishdan oldin tasdiqlash.
 - Anonim rejim: botning admin ekranida ism va guruh yashiriladi. Bazada akkaunt bilan bog'lanish saqlanadi, to'liq anonimlik ta'minlanmaydi.
-- Talaba o'z murojaatlari, holati va zamdekan javoblarini ko'radi.
+- Talaba o'z murojaatlari, holati va dekan javoblarini ko'radi.
 - Admin: ochiq murojaatlar ro'yxati, statistika, javob berish va holat o'zgartirish.
 - SQLite bazasi: profil, murojaat va javoblar qayta ishga tushganda saqlanadi.
 - Bot faqat shaxsiy chatda ishlaydi. Ism va guruhni talaba o'zi kiritadi; universitet tizimi bilan tekshirish ulanmagan.

@@ -1,1 +1,1 @@
-"""Talaba va zamdekan o'rtasidagi murojaatlar boti."""
+"""Talaba va dekan o'rtasidagi murojaatlar boti."""

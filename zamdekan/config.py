@@ -23,4 +23,4 @@ class Config:
             raise ValueError("ADMIN_IDS faqat vergul bilan ajratilgan raqamli IDlardan iborat bo'lsin.") from None
         if not admins or any(v <= 0 for v in admins):
             raise ValueError("ADMIN_IDS ga kamida bitta musbat Telegram foydalanuvchi ID kiriting.")
-        return cls(token, admins, os.getenv("BOT_TITLE", "Zamdekan"), os.getenv("DATABASE_PATH", "data/zamdekan.sqlite3"))
+        return cls(token, admins, os.getenv("BOT_TITLE", "Tarix va huquq dekani murojaat bot"), os.getenv("DATABASE_PATH", "data/zamdekan.sqlite3"))
